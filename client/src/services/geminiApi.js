@@ -12,17 +12,32 @@ import axios from 'axios';
  * • In **journal** mode we forward the prompt verbatim (so your
  *   JournalPage keeps total control).
  */
+const LANGUAGE_NAME_MAP = {
+  en: 'English',
+  hi: 'Hindi',
+  te: 'Telugu',
+  ta: 'Tamil',
+  kn: 'Kannada',
+  ml: 'Malayalam',
+  bn: 'Bengali',
+  gu: 'Gujarati',
+  mr: 'Marathi',
+  pa: 'Punjabi',
+  ur: 'Urdu',
+  or: 'Odia'
+};
+
 export const getGeminiReply = async (prompt, lang, mode = 'chat') => {
   try {
     let finalPrompt = prompt;
-
+    const languageName = LANGUAGE_NAME_MAP[lang] || 'Hindi';    
     if (mode === 'chat') {
       // ---------- System instructions for everyday Q&A --------------------
       const systemPrompt = `
 You are **Janani**, a caring, evidence‑based maternity companion.
 
 RULES
-1. Answer exclusively in the user’s language: ${lang}.
+1. Answer exclusively in the user’s language: ${languageName}.
 2. If the user asks a PRACTICAL pregnancy‑related question
    (e.g. hunger, diet, nausea, exercise, medication, pain),
    give clear, safe, culturally familiar suggestions first
@@ -35,6 +50,7 @@ RULES
 4. Never add unrelated poetic imagery to practical questions.
 5. Keep replies under 120 words.
 6. if the user just talks about greeting or casual conversation like how are you what are you doing etc, do not add encouraging line. 
+
 
 User message ↓
 ${prompt}
