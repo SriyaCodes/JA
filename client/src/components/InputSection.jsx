@@ -5,7 +5,6 @@ import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getGeminiReply } from '../services/geminiApi';
 import { franc } from 'franc';
-
 function InputSection({ onReply }) {
   // State
   const [input, setInput] = useState('');
