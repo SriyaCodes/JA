@@ -14,7 +14,7 @@ const PregAyurvedaPage = () => {
   const [bookmarked, setBookmarked] = useState([]);
   const [trimester, setTrimester] = useState(1);
   const auth = getAuth();
-
+  const t = translations[language] || translations['en-IN'];
   // Pregnancy Ayurvedic remedies organized by trimester and language
   const ayurvedicRemedies = {
     'en-IN': { // English
@@ -823,13 +823,6 @@ const PregAyurvedaPage = () => {
     }
   ]
 }
-
-
-
-
-
-
-
   };
 
   // Fetch user data
@@ -879,10 +872,7 @@ const PregAyurvedaPage = () => {
      <div className="min-h-screen bg-gradient-to-b from-green-50 to-teal-50">
 
     {/* ✅ Place Navbar outside the padded container to avoid extra spacing */}
-    <Navbar
-  translations={navbarTranslations[language] || navbarTranslations['en-IN']}
-  streak={streak}
-/>
+    <Navbar title={t.title} streak={0} lang={language} />
 
       <motion.header
         initial={{ opacity: 0, y: -20 }}
